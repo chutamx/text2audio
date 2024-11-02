@@ -1,0 +1,46 @@
+# Archivos temporales de audio
+temp/
+*.wav
+
+# Entorno virtual de Python
+venv/
+env/
+.env/
+
+# Archivos de caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribución / empaquetado
+dist/
+build/
+*.egg-info/
+
+# IDEs y editores
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de registro
+*.log
+
+# Archivos de modelo descargados por AudioLDM
+models/
+
+# Archivos de configuración local
+.env
+.env.local
+
+# Archivos de dependencias
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Archivos de cobertura de pruebas
+.coverage
+htmlcov/ 
