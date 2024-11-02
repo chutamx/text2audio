@@ -1,5 +1,5 @@
 # Usar una imagen base más ligera
-FROM python:3.9-slim
+FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
 
 # Establecer directorio de trabajo
 WORKDIR /app
