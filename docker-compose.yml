@@ -7,15 +7,17 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
+      - /usr/local/nvidia:/usr/local/nvidia
+      - /usr/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
-              count: all
+              count: 1
               capabilities: [gpu]
-    shm_size: '8gb'
-    ulimits:
-      memlock: -1
-      stack: 67108864
+    shm_size: '16gb'
     runtime: nvidia

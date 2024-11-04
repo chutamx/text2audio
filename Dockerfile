@@ -1,5 +1,4 @@
-# Usar una imagen base de NVIDIA con soporte completo
-FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
+FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
 
 # Establecer directorio de trabajo
 WORKDIR /app
@@ -13,14 +12,11 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Crear un enlace simbólico para python
-RUN ln -s /usr/bin/python3 /usr/bin/python
-
 # Actualizar pip
 RUN python3 -m pip install --upgrade pip
 
-# Instalar PyTorch con soporte CUDA
-RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+# Instalar PyTorch con soporte CUDA específico para V100
+RUN pip3 install torch==2.0.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
 
 # Copiar los archivos de requerimientos
 COPY requirements.txt .
