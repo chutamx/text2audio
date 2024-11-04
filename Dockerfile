@@ -13,10 +13,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Actualizar pip
-RUN python3 -m pip install --upgrade pip
+RUN python -m pip install --upgrade pip
 
 # Instalar PyTorch con soporte CUDA específico para V100
-RUN pip3 install torch==2.0.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
+RUN pip install torch==2.0.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
 
 # Copiar los archivos de requerimientos
 COPY requirements.txt .
@@ -37,5 +37,5 @@ RUN mkdir -p temp
 # Exponer el puerto que usa FastAPI
 EXPOSE 8000
 
-# Comando para ejecutar la aplicación con hot-reload
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"] 
+# Modificar el comando para usar la ruta correcta de Python
+CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
