@@ -1,5 +1,5 @@
-# Usar una imagen base más ligera
-FROM nvidia/cuda:11.8.0-runtime-ubuntu22.04
+# Usar una imagen base de NVIDIA con soporte completo
+FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
 
 # Establecer directorio de trabajo
 WORKDIR /app
@@ -20,7 +20,7 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN python3 -m pip install --upgrade pip
 
 # Instalar PyTorch con soporte CUDA
-RUN pip install torch==2.0.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 
 # Copiar los archivos de requerimientos
 COPY requirements.txt .
