@@ -5,15 +5,13 @@ WORKDIR /app
 
 # Instalar dependencias del sistema necesarias
 RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
     libsndfile1 \
     git \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 # Actualizar pip
-RUN python -m pip install --upgrade pip
+RUN pip install --upgrade pip
 
 # Instalar PyTorch con soporte CUDA específico para V100
 RUN pip install torch==2.0.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
@@ -37,5 +35,5 @@ RUN mkdir -p temp
 # Exponer el puerto que usa FastAPI
 EXPOSE 8000
 
-# Modificar el comando para usar la ruta correcta de Python
-CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Usar la ruta correcta de Python de la imagen de PyTorch
+CMD ["/opt/conda/bin/python3", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
