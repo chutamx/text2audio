@@ -6,16 +6,21 @@ WORKDIR /app
 
 # Instalar dependencias del sistema necesarias
 RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
     libsndfile1 \
     git \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Actualizar pip
-RUN pip install --upgrade pip
+# Crear un enlace simbólico para python
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
-# Instalar PyTorch primero
-RUN pip install torch==1.13.1 --extra-index-url https://download.pytorch.org/whl/cpu
+# Actualizar pip
+RUN python3 -m pip install --upgrade pip
+
+# Instalar PyTorch con soporte CUDA
+RUN pip install torch==2.0.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 
 # Copiar los archivos de requerimientos
 COPY requirements.txt .
