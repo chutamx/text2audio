@@ -35,5 +35,5 @@ RUN mkdir -p temp
 # Exponer el puerto que usa FastAPI
 EXPOSE 8000
 
-# Usar la ruta correcta de Python de la imagen de PyTorch
-CMD ["/opt/conda/bin/python3", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Usar python3 directamente de la imagen base
+CMD ["python3", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

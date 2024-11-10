@@ -16,7 +16,7 @@ app = FastAPI(
 
 # Inicializar el modelo
 try:
-    pipe = AudioLDMPipeline.from_pretrained("cvssp/audioldm-s-full-v2")
+    pipe = AudioLDMPipeline.from_pretrained("cvssp/audioldm-l-full")
     if torch.cuda.is_available():
         pipe = pipe.to("cuda")
     else:

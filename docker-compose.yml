@@ -6,12 +6,8 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - .:/app
-      - /usr/local/nvidia:/usr/local/nvidia
-      - /usr/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=all
+      - ./app:/app/app
+    command: python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     deploy:
       resources:
         reservations:
